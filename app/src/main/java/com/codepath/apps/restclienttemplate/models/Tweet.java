@@ -2,6 +2,8 @@ package com.codepath.apps.restclienttemplate.models;
 
 import android.util.JsonReader;
 
+import com.codepath.apps.restclienttemplate.TimeFormatter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +17,7 @@ public class Tweet {
     public String createdAt;
     public long id;
     public User user;
+
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
@@ -31,5 +34,9 @@ public class Tweet {
             tweets.add(fromJson(jsonArray.getJSONObject(i)));
         }
         return tweets;
+    }
+
+    public static String getFormattedTimestamp(Tweet tweet) {
+        return TimeFormatter.getTimeDifference(tweet.createdAt);
     }
 }
